@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/8.0.121">
+    <children>
+        <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <VBox>
+                    <children>
+                        <MenuBar BorderPane.alignment="CENTER">
+                            <menus>
+                                <Menu mnemonicParsing="false" text="File">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Close"/>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Edit">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Stadt wählen"/>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Help">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Über"/>
+                                    </items>
+                                </Menu>
+                            </menus>
+                        </MenuBar>
+                    </children>
+                </VBox>
+            </top>
+            <left>
+                <AnchorPane>
+                    <VBox minWidth="150.0" style="-fx-padding: 10px" AnchorPane.bottomAnchor="0.0"
+                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+                          BorderPane.alignment="CENTER">
+                        <children>
+                            <Label style="-fx-padding: 5px" text="Aktuell"/>
+                            <Label fx:id="aktuellLbl" style="-fx-padding: 5px" text="Aktuell"/>
+                            <Label fx:id="temperaturLbl"
+                                   style="-fx-padding: 5px;-fx-font-family: sans-serif;-fx-font-size: 24px"
+                                   text="Temperatur"/>
+                            <Label fx:id="wolkenLbl" style="-fx-padding: 5px" text="Wolken"/>
+                            <Label fx:id="niederschlageLbl" style="-fx-padding: 5px" text="Niederschlag"/>
+                            <Label fx:id="windLbl" style="-fx-padding: 5px" text="Wind"/>
+                            <Label fx:id="luftfeuchteLbl" style="-fx-padding: 5px" text="Luftfeuchte"/>
+                            <Label fx:id="luftdruckLbl" style="-fx-padding: 5px" text="Luftdruck"/>
+
+                            <VBox style="-fx-padding: 15px">
+                                <Button fx:id="refreshBtn" text="Aktualisieren"/>
+                            </VBox>
+                        </children>
+                    </VBox>
+                </AnchorPane>
+            </left>
+            <center>
+                <AnchorPane>
+                    <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0" minWidth="400">
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                              AnchorPane.topAnchor="0.0">
+                            <children>
+                                <LineChart fx:id="lineChart" minHeight="300" minWidth="1000" BorderPane.alignment="CENTER"
+                                           stylesheets="@tempChart.css">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="xAxis"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis fx:id="yAxis" side="LEFT"/>
+                                    </yAxis>
+                                </LineChart>
+
+                                <BarChart fx:id="barChart" minHeight="300" minWidth="400" BorderPane.alignment="CENTER">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="xAxis2"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis fx:id="yAxis2" side="LEFT"/>
+                                    </yAxis>
+                                </BarChart>
+
+                                <BarChart fx:id="windBarChart" minHeight="300" minWidth="400" BorderPane.alignment="CENTER">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="xAxisWind"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis fx:id="yAxisWind" side="LEFT"/>
+                                    </yAxis>
+                                </BarChart>
+
+                                <LineChart fx:id="luftdruckLineChart" minHeight="300" minWidth="400" BorderPane.alignment="CENTER">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="xAxisLuftdruck"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis fx:id="yAxisLuftdruck" side="LEFT"/>
+                                    </yAxis>
+                                </LineChart>
+
+                                <LineChart fx:id="luftfeuchtigkeitLineChart" minHeight="300" minWidth="400" BorderPane.alignment="CENTER">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="xAxisLuftfeuchtigkeit"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis fx:id="yAxisLuftfeuchtigkeit" side="LEFT"/>
+                                    </yAxis>
+                                </LineChart>
+
+                            </children>
+                        </VBox>
+                    </ScrollPane>
+                </AnchorPane>
+            </center>
+
+            <right>
+            </right>
+
+            <bottom>
+                <AnchorPane>
+                    <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                               AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="table" maxHeight="300.0">
+                            <columns>
+                                <TableColumn fx:id="dateCol" prefWidth="99" text="Tag"/>
+                                <TableColumn fx:id="timeCol" prefWidth="99" text="Uhrzeit"/>
+                                <TableColumn fx:id="tempCol" prefWidth="99" text="Temperatur in °C"/>
+                                <TableColumn fx:id="windCol" prefWidth="99" text="Wind in km/h"/>
+                                <TableColumn fx:id="wolkenCol" prefWidth="99" text="Beschreibung"/>
+                                <TableColumn fx:id="niederschlagCol" prefWidth="99" text="Niederschlag in mm"/>
+                                <TableColumn fx:id="luftfeuchteCol" prefWidth="99" text="Luftfeuchte in %"/>
+                                <TableColumn fx:id="luftdruckCol" prefWidth="99" text="Luftdruck in hPa"/>
+                            </columns>
+                        </TableView>
+                    </StackPane>
+                </AnchorPane>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>
